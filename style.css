@@ -1,0 +1,64 @@
+body {
+    background-color: black;
+}
+
+#velvetvansBody {
+    text-align: center;
+    background-color: black;
+}
+
+#paragraph {
+    color: white;
+    background-color: black;
+    font-family: Monaco;
+    margin: auto;
+    white-space: pre-wrap;
+}
+
+#main {
+    color: white;
+    white-space: pre-wrap;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#mainFrame {
+    margin: auto;
+    height: 50%;
+    width: 50%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+}
+
+#tweetDiv {
+    align-items: center;
+    justify-content: center
+}
+
+#libraryDiv {
+    margin: auto;
+    height: 25%;
+    width: 50%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: red;
+}
+
+#library {
+    font-family: Monaco;
+    color: white;
+}
+
+
+#velvetFrame {
+    display: inline-block;
+    margin: auto;
+    height: 85%;
+    width: 85%;
+    border-style: solid;
+    border-width: 0px;
+    border-color: black;
+}
+
+
