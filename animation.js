@@ -1,6 +1,4 @@
-//piss test 2
 
-//wow "piss"?? hilarious
 var twoD = [];
 var text = [];
 var w = 0;
@@ -170,32 +168,79 @@ async function fillContent() {
 
 
         var chars = string.split("");
+        var charsToAdd;
 
 
-
+        //compare width of the array to the length of the string
         padding = (text[1].length - string.length);
 
+
         if(padding < 0){
+            //if the string is longer than the width of the array
+
             chars = [];
+            var chars2 = [];
+            var line1Finished = false;
+            //split string into array containing the individual words
             var words = string.split(" ");
+
             for(var i = 0; i < words.length; i++){
-                if((chars.length + words[i].length) < text[1].length){
-                    var addition = words.split[""];
-                    chars.push(addition.toString);
+                if((chars.length + words[i].length) < (text[1].length - 5) && line1Finished == false){
+                    charsToAdd = words[i].split("");
+                    charsToAdd.push(" ")
+                        for(k = 0; k < charsToAdd.length; k++){
+                            chars.push(charsToAdd[k]);
+                    }
+                    
+                }else{
+                    line1Finished = true;
+                   	charsToAdd = words[i].split("")
+                    charsToAdd.push(" ");
+                    for(k = 0; k < charsToAdd.length; k++){
+                        chars2.push(charsToAdd[k]);
+                    }
                 }
 
             }
-        }
-        for (j = 0; j < padding / 2; j++) {
-            chars.push(" ");
+            //center lines 1 and 2 in their respective lines
+               var buffer = text[1].length - chars.length;
+               var buffer2 = text[1].length - chars2.length;
+                    for (j = 0; j < buffer / 2; j++) {
+                        chars.push(" ");
+                    }
+
+                    for (j = 0; j < buffer / 2; j++) {
+                        chars.unshift(" ");
+                    }
+
+                    for (j = 0; j < buffer2 / 2; j++) {
+                        chars2.push(" ");
+                    }
+    
+                    for (j = 0; j < buffer2 / 2; j++) {
+                        chars2.unshift(" ");
+                    }
+
+
+
+            var middle = Math.floor(text.length / 2);
+            text[middle] = chars;
+            text[middle + 1] = chars2;
         }
 
-        for (j = 0; j < padding / 2; j++) {
-            chars.unshift(" ");
+
+        if(padding >= 0){
+                for (j = 0; j < padding / 2; j++) {
+                    chars.push(" ");
+                }
+
+                for (j = 0; j < padding / 2; j++) {
+                    chars.unshift(" ");
+                }
+
+
+            text[Math.floor(text.length / 2)] = chars;
         }
-
-
-        text[Math.floor(text.length / 2)] = chars;
         resolve();
     });
 }
@@ -292,7 +337,7 @@ function qKeyListener(event) {
 
     if (event.keyCode != 81) { // 81 is the numerical key code for "q"
         if(event.keyCode == 187){
-            var newEntry = await addEntry();
+            //var newEntry = await addEntry();
         }
     }
     else {    // The user has hit q
