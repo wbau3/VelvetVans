@@ -175,7 +175,17 @@ async function fillContent() {
 
         padding = (text[1].length - string.length);
 
+        if(padding < 0){
+            chars = [];
+            var words = string.split(" ");
+            for(var i = 0; i < words.length; i++){
+                if((chars.length + words[i].length) < text[1].length){
+                    var addition = words.split[""];
+                    chars.push(addition.toString);
+                }
 
+            }
+        }
         for (j = 0; j < padding / 2; j++) {
             chars.push(" ");
         }
