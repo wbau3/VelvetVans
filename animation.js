@@ -1,3 +1,5 @@
+//new new may 2nd
+
 var twoD = [];
 var text = [];
 var w = 0;
@@ -278,10 +280,21 @@ function qKeyListener(event) {
     //var userInput = "";
 
     if (event.keyCode != 81) { // 81 is the numerical key code for "q"
-
+        if(event.keyCode == 187){
+            var newEntry = await addEntry();
+        }
     }
     else {    // The user has hit q
         quit = true;
     }
+
+}
+
+
+async function addEntry(){
+        return new Promise(resolve => {
+            
+        })
+
 
 }
