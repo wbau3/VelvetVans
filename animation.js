@@ -161,9 +161,8 @@ async function createArrays() {
 async function fillContent() {
     return new Promise(resolve => {
 
+        // Pick random string from contentArray and assign to variable
         var element = Math.floor(Math.random() * contentArray.length);
-
-
         var string = contentArray[element];
 
 
@@ -171,65 +170,94 @@ async function fillContent() {
         var charsToAdd;
 
 
-        //compare width of the array to the length of the string
+        //compare width of the array to the length of the selected string
         padding = (text[1].length - string.length);
 
 
         if(padding < 0){
-            //if the string is longer than the width of the array
+            //The string is longer than the width of the array
 
-            chars = [];
-            var chars2 = [];
-            var line1Finished = false;
-            //split string into array containing the individual words
-            var words = string.split(" ");
+                chars = [];      //content to put in the first line
+                var chars2 = []; //content to put in the second line
+                var chars3 = []; //content to put in the third line
+                var line1Finished = false;
+                var line2Finished = false;
+                //split string into array containing the individual words
+                var words = string.split(" ");
 
-            for(var i = 0; i < words.length; i++){
-                if((chars.length + words[i].length) < (text[1].length - 5) && line1Finished == false){
-                    charsToAdd = words[i].split("");
-                    charsToAdd.push(" ")
-                        for(k = 0; k < charsToAdd.length; k++){
-                            chars.push(charsToAdd[k]);
-                    }
-                    
-                }else{
-                    line1Finished = true;
-                   	charsToAdd = words[i].split("")
-                    charsToAdd.push(" ");
-                    for(k = 0; k < charsToAdd.length; k++){
-                        chars2.push(charsToAdd[k]);
-                    }
-                }
+                for(var i = 0; i < words.length; i++){
+                    // check if one more word can be added to the first line with enough space on the edges to look nice (the -5)
+                        if((chars.length + words[i].length) < (text[1].length - 5) && line1Finished == false){
+                            charsToAdd = words[i].split("");
+                            charsToAdd.push(" ");
+                                for(k = 0; k < charsToAdd.length; k++){
+                                    chars.push(charsToAdd[k]);
+                        }
+                            //else, check if the word can be added to the second line with enough space to spare
+                        }else if((chars2.length + words[i].length) < (text[1].length - 5) && line2Finished == false) {
+                            line1Finished = true;
+                   	        charsToAdd = words[i].split("");
+                            charsToAdd.push(" ");
+                                for(k = 0; k < charsToAdd.length; k++){
+                                    chars2.push(charsToAdd[k]);
+                                }
+                        }else{
+                            line2Finished = true;
+                            charsToAdd = words[i].split("");
+                            charsToAdd.push(" ");
+                                for(k = 0; k < charsToAdd.length; k++){
+                                    chars3.push(charsToAdd[k]);    
 
-            }
-            //center lines 1 and 2 in their respective lines
-               var buffer = text[1].length - chars.length;
-               var buffer2 = text[1].length - chars2.length;
-                    for (j = 0; j < buffer / 2; j++) {
-                        chars.push(" ");
-                    }
+                                }
+                    //center all lines in their respective rows
+                    var buffer = text[1].length - chars.length;
+                    var buffer2 = text[1].length - chars2.length;
+                    var buffer3 = text[1].length - chars3.length;
+                            
+                        for (j = 0; j < buffer / 2; j++) {
+                            chars.push(" ");
+                        }
 
-                    for (j = 0; j < buffer / 2; j++) {
-                        chars.unshift(" ");
-                    }
+                        for (j = 0; j < buffer / 2; j++) {
+                            chars.unshift(" ");
+                        }
 
-                    for (j = 0; j < buffer2 / 2; j++) {
-                        chars2.push(" ");
-                    }
+                        for (j = 0; j < buffer2 / 2; j++) {
+                            chars2.push(" ");
+                        }
     
-                    for (j = 0; j < buffer2 / 2; j++) {
-                        chars2.unshift(" ");
+                        for (j = 0; j < buffer2 / 2; j++) {
+                            chars2.unshift(" ");
+                        }
+                            
+                            
+                        if(chars3.length != 0){
+                             for (j = 0; j < buffer3 / 2; j++) {
+                                chars3.push(" ");
+                            }
+    
+                            for (j = 0; j < buffer3 / 2; j++) {
+                                chars3.unshift(" ");
+                            }
+                            
+                        }
+                        
+       
+
+
+                //Place lines into correct rows in array
+                    var middle = Math.floor(text.length / 2);
+                    text[middle] = chars;
+                    text[middle + 1] = chars2;
+                    
+                    if(chars3.length  1){
+                        text[middle + 2] = chars3;
                     }
-
-
-
-            var middle = Math.floor(text.length / 2);
-            text[middle] = chars;
-            text[middle + 1] = chars2;
-        }
+        } // end of multiple-line if
 
 
         if(padding >= 0){
+            //The selected string fits on one line of the array
                 for (j = 0; j < padding / 2; j++) {
                     chars.push(" ");
                 }
