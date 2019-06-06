@@ -8,7 +8,7 @@ var divWidth = document.getElementById("velvetFrame").clientWidth;
 
 var mobile = isMobileDevice();
 if (mobile) {
-    w = Math.floor(divWidth / 25) + 1;
+    w = Math.floor(divWidth / 27);
     h = Math.floor(divHeight / 45);
 } else {
     w = Math.floor(divWidth / 25);
