@@ -364,8 +364,8 @@ function qKeyListener(event) {
     //var userInput = "";
 
     if (event.keyCode != 81) { // 81 is the numerical key code for "q"
-        if(event.keyCode == 187){
-            //var newEntry = await addEntry();
+        if(event.keyCode == 97){ //keycode for 'a'
+            var newEntry = await addEntry("testString");
         }
     }
     else {    // The user has hit q
@@ -375,8 +375,23 @@ function qKeyListener(event) {
 }
 
 
-async function addEntry(){
+        
+async function addEntry(newString){
         return new Promise(resolve => {
+            
+            var xhttp = new XMLHttpRequest();
+            
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                     var sendURL = "www.ennui.online/vvadstring=" + newString;
+                     xhttp.open("POST", sendURL);
+                     xhttp.send();
+                    resolve();
+                 }
+            };
+            
+
+            
             
         })
 
