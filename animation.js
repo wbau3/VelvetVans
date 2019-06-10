@@ -383,15 +383,13 @@ async function addEntry(newString){
             
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                     var sendURL = "www.ennui.online/vvadstring=" + newString;
-                     xhttp.open("POST", sendURL);
-                     xhttp.send();
-                    resolve();
+                    
                  }
             };
-            
-
-            
+            var sendURL = "www.ennui.online/vvadstring=" + newString;
+            xhttp.open("POST", sendURL);
+            xhttp.send();
+            resolve();
             
         })
 
