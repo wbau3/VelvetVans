@@ -1,10 +1,11 @@
-
 var twoD = [];
 var text = [];
 var w = 0;
 var h = 0;
 var divHeight = document.getElementById("velvetFrame").clientHeight;
 var divWidth = document.getElementById("velvetFrame").clientWidth;
+var collectingInput = false;
+var newEntry = "";
 
 var mobile = isMobileDevice();
 if (mobile) {
@@ -209,6 +210,9 @@ async function fillContent() {
                                     chars3.push(charsToAdd[k]);    
 
                                 }
+                                
+                        }
+                   }
                     //center all lines in their respective rows
                     var buffer = text[1].length - chars.length;
                     var buffer2 = text[1].length - chars2.length;
@@ -250,10 +254,12 @@ async function fillContent() {
                     text[middle] = chars;
                     text[middle + 1] = chars2;
                     
-                    if(chars3.length  1){
+                    if(chars3.length > 1){
                         text[middle + 2] = chars3;
                     }
-        } // end of multiple-line if
+        
+        }// end of multiple-line if
+        
 
 
         if(padding >= 0){
@@ -362,14 +368,20 @@ async function pause() {
 //Listen for 'q' key. If I ever get the quit option working.
 function qKeyListener(event) {
     //var userInput = "";
-
-    if (event.keyCode != 81) { // 81 is the numerical key code for "q"
-        if(event.keyCode == 97){ //keycode for 'a'
-            var newEntry = await addEntry("newtestnewtest");
-        }
-    }
-    else {    // The user has hit q
+    if(collectingInput == true && event.keyCode != 13){ // enter key is '13'
+        newEntry += String.fromCharCode(event.keyCode);
+        
+    } else if(event.keyCode == 13){
+              addEntry(newEntry);
+        
+    } else if(event.keyCode == 65 && collectingInput == false){ //keycode for 'a'
+            collectingInput = true;
+            document.getElementById("main").textContent = "Type new entry:";
+            
+    } else {
+        // The user has hit 'q' while not entering new string to add
         quit = true;
+        throw new Error();
     }
 
 }
@@ -386,7 +398,7 @@ async function addEntry(newString){
                     
                  }
             };
-            var sendURL = "ennui.online/vvad?string=" + newString;
+            var sendURL = "www.ennui.online/vvad?string=" + newString;
             xhttp.open("POST", sendURL);
             xhttp.send();
             resolve();
