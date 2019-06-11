@@ -30,7 +30,7 @@ var revealDone = false;
 var coverDone = false;
 var contentArray = [];
 var pause;
-window.addEventListener("keypress", qKeyListener);
+document.addEventListener("keypress", qKeyListener);
 main();
 
 
