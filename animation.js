@@ -365,7 +365,7 @@ function qKeyListener(event) {
 
     if (event.keyCode != 81) { // 81 is the numerical key code for "q"
         if(event.keyCode == 97){ //keycode for 'a'
-            var newEntry = await addEntry("testString");
+            var newEntry = await addEntry("newtestnewtest");
         }
     }
     else {    // The user has hit q
@@ -386,7 +386,7 @@ async function addEntry(newString){
                     
                  }
             };
-            var sendURL = "www.ennui.online/vvadstring=" + newString;
+            var sendURL = "ennui.online/vvad?string=" + newString;
             xhttp.open("POST", sendURL);
             xhttp.send();
             resolve();
